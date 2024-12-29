@@ -1,4 +1,3 @@
-!pip install pandas openpyxl
 import requests
 import pandas as pd
 from io import BytesIO
