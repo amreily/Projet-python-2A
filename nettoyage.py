@@ -64,3 +64,21 @@ def convert_to_quarterly(df, date_column, value_columns):
     df_quarterly.rename(columns={date_column: 'trimestre'}, inplace=True)
 
     return df_quarterly
+
+# Transformation de l'écriture des éléments de la colonne trimestre pour que toutes les colonnes soient du même format
+def format_trimestre(trimestre):
+     # Extraire l'année et le trimestre
+     annee = trimestre.year
+     mois = trimestre.month
+     # Calculer le trimestre en fonction du mois
+     if mois in [3]:
+         trimestre = "T1"
+     elif mois in [6]:
+         trimestre = "T2"
+     elif mois in [9]:
+         trimestre = "T3"
+     else:
+         trimestre = "T4"
+     # Retourner le format "T1.2000"
+     return f"{trimestre}.{annee}"
+# Appliquer la fonction à chaque date pour créer la nouvelle colonne : confiance['trimestre'] = confiance['trimestre'].apply(format_trimestre)

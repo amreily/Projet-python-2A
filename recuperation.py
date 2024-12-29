@@ -1,8 +1,11 @@
+!pip install pandas openpyxl
 import requests
 import pandas as pd
+from io import BytesIO
+import zipfile
 
 # Fonction permettant de récupérer des fichiers depuis leur adresse URL.
-def url_df(url, excel_name=None, sheet_name=None):
+def url_df(url, excel_name=None, sheet_name=None, save_as_csv=False, csv_name="output.csv"):
     try:
         response = requests.get(url)  # Télécharge le fichier
         response.raise_for_status()
@@ -41,6 +44,11 @@ def url_df(url, excel_name=None, sheet_name=None):
         # Création d'un dataframe
         df = excel_data.parse(sheet_name)
         print(f"Feuille '{sheet_name}' chargée.")
+        
+        # Sauvegarde en CSV si demandé
+        if save_as_csv:
+            df.to_csv(csv_name, index=False, encoding='utf-8-sig')
+            print(f"Fichier sauvegardé au format CSV sous le nom : {csv_name}")
         
         return df
     
