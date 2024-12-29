@@ -8,9 +8,9 @@ df = pd.read_csv(file_path)
 df = df[df['date'] >= '2000-T1']
 
 # Transformation des trimestres (T1, T2, ...) en équivalents numériques (3, 6, ...)
-df['date'] = df['date'].str.replace(r'-T1', '-3', regex=True)
-df['date'] = df['date'].str.replace(r'-T2', '-6', regex=True)
-df['date'] = df['date'].str.replace(r'-T3', '-9', regex=True)
+df['date'] = df['date'].str.replace(r'-T1', '-03', regex=True)
+df['date'] = df['date'].str.replace(r'-T2', '-06', regex=True)
+df['date'] = df['date'].str.replace(r'-T3', '-09', regex=True)
 df['date'] = df['date'].str.replace(r'-T4', '-12', regex=True)
 
 # Sauvegarde du fichier modifié
