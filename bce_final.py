@@ -1,21 +1,14 @@
 import pandas as pd
+# Charger le fichier bce_final.csv
+file_path_final = 'bce_final.csv'
+data = pd.read_csv(file_path_final)
 
-# Nom du fichier source et du fichier de sortie
-input_file = "bce_final.csv"
-output_file = "0_bce_final.csv"
+# Garder uniquement les colonnes DATE et la dernière colonne, et renommer cette dernière en "rate"
+data = data[['DATE', 'Main refinancing operations - fixed rate tenders (fixed rate) (date of changes) - Level (FM.B.U2.EUR.4F.KR.MRR_FR.LEV)']]
+data = data.rename(columns={'Main refinancing operations - fixed rate tenders (fixed rate) (date of changes) - Level (FM.B.U2.EUR.4F.KR.MRR_FR.LEV)': 'rate'})
 
-# Lire le fichier CSV
-try:
-    data = pd.read_csv(input_file)
+# Enregistrer dans un nouveau fichier CSV
+output_final_final_path = 'bce_final_final.csv'
+data.to_csv(output_final_final_path, index=False)
 
-    # Transformer la colonne "date" pour ne conserver que l'année et le mois
-    data['date'] = pd.to_datetime(data['date']).dt.strftime('%Y-%m')
-
-    # Sauvegarder les données modifiées dans un nouveau fichier CSV
-    data.to_csv(output_file, index=False)
-
-    print(f"Les dates ont été formatées et les données enregistrées dans le fichier {output_file}.")
-except FileNotFoundError:
-    print(f"Le fichier {input_file} est introuvable.")
-except KeyError as e:
-    print(f"Erreur: {e}. Assurez-vous que les colonnes 'date' et 'rate' existent dans le fichier source.")
+output_final_final_path
